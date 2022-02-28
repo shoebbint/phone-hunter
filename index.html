@@ -16,12 +16,15 @@
             <div>
                 <h1 class="text-center">Mobile Discoverer</h1>
             </div>
-            <div>
-                <div class="input-group mb-3  ">
-                    <input type="text" class="form-control rounded-pill" placeholder="Recipient's username"
-                        aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-warning rounded-pill " type="button" id="">Button</button>
-                </div>
+            <div class="input-group mb-3  ">
+                <input type="text" id="search-field" class="form-control rounded-pill"
+                    placeholder="Recipient's username" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <button onclick="phoneSearch()" class="btn btn-outline-warning rounded-pill " type="button"
+                    id="search-btn">Search</button>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4 pt-5" id="search-result">
+
             </div>
         </div>
     </section>
