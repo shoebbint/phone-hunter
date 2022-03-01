@@ -1,28 +1,46 @@
+// search-button-function
 const phoneSearch = () => {
-    const searchText = document.getElementById("search-field").value;
+
+    let searchText = document.getElementById("search-field").value;
+    //search api 
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+
     fetch(url)
         .then(res => res.json())
-        .then(data => showPhones(data.data))
+        .then(data => showPhones(data.status, data.data))
+    document.getElementById("search-field").value = "";
 }
-const showPhones = (phones) => {
-    const searchResult = document.getElementById('search-result');
-    phones.forEach(phone => {
-        console.log(phone.slug);
+const showPhones = (apiData, phones) => {
 
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
+    if (apiData == true) {
+
+        const searchResult = document.getElementById('search-result');
+        searchResult.innerHTML = "";
+        phones.forEach(phone => {
+
+            console.log(phone);
+
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
         <div class="card " style="width: 18rem;">
             <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title text-center">${phone.phone_name}</h5>
             <p class="card-text text-center">Brand:${phone.brand}</p>
+            <div class="text-center">
             <a href="#" onclick="seeDetails('${phone.slug}')" id="details-btn" class="btn btn-primary mx-auto">See Details</a>
             </div>
+            </div>
         </div>`
-        searchResult.appendChild(div);
-    });
+            searchResult.appendChild(div);
+        });
+    }
+    else {
+        const noResultDiv = document.getElementById('no-result');
+        noResultDiv.style.display = "block";
+    }
+
 }
 
 const seeDetails = (id) => {
@@ -34,6 +52,7 @@ const seeDetails = (id) => {
 
     const showDetails = (details) => {
         const phoneDetails = document.getElementById('phone-details');
+        phoneDetails.innerHTML = "";
         console.log(details)
 
         const div = document.createElement('div');
