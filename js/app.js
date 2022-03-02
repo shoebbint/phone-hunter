@@ -1,6 +1,6 @@
 // search-button-function
 const phoneSearch = () => {
-
+    document.getElementById('phone-details').innerHTML = "";
     let searchText = document.getElementById("search-field").value;
     //search api 
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
@@ -8,13 +8,15 @@ const phoneSearch = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => showPhones(data.status, data.data))
+    console.log(data)
     document.getElementById("search-field").value = "";
 }
 const showPhones = (apiData, phones) => {
-
+    const searchResult = document.getElementById('search-result');
+    const noResultDiv = document.getElementById('no-result');
     if (apiData == true) {
 
-        const searchResult = document.getElementById('search-result');
+        noResultDiv.style.display = "none";
         searchResult.innerHTML = "";
         phones.forEach(phone => {
 
@@ -37,7 +39,7 @@ const showPhones = (apiData, phones) => {
         });
     }
     else {
-        const noResultDiv = document.getElementById('no-result');
+        searchResult.innerHTML = "";
         noResultDiv.style.display = "block";
     }
 
@@ -55,26 +57,52 @@ const seeDetails = (id) => {
         phoneDetails.innerHTML = "";
         console.log(details)
 
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div class="card h-100 w-50 mx-auto">
-            <img class="mx-auto" src="${details.image}" class="card-img-top w-50" alt="...">
-            <div class="card-body">
-            <h5 class="card-title text-center">${details.name}</h5>
-            <p class="card-text text-center">${details.releaseDate}</p>
-            </div>
-            <div>
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item text-center">Storage: ${details.mainFeatures.storage}</li>
-            <li class="list-group-item text-center">Display: ${details.mainFeatures.displaySize}</li>
-            <li class="list-group-item text-center">Chip: ${details.mainFeatures.chipSet}</li>
-            </ul>
-            </div>
-            <div class="card-footer">
-            <small class="text-muted">${details.releaseDate}</small>
-            </div>
-        </div>`
-        phoneDetails.appendChild(div);
+
+        if (details.releaseDate == '') {
+            console.log('bal')
+            const div2 = document.createElement('div');
+            div2.innerHTML = `
+            <div class="card h-100 w-50 mx-auto">
+                <img class="mx-auto" src="${details.image}" class="card-img-top w-50" alt="...">
+                <div class="card-body">
+                <h5 class="card-title text-center">${details.name}</h5>
+                <p class="card-text text-center">Release Date:Not Found</p>
+                </div>
+                <div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">Storage: ${details.mainFeatures.storage}</li>
+                <li class="list-group-item text-center">Display: ${details.mainFeatures.displaySize}</li>
+                <li class="list-group-item text-center">Chip: ${details.mainFeatures.chipSet}</li>
+                </ul>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">${details.releaseDate}</small>
+                </div>
+            </div>`
+            phoneDetails.appendChild(div2);
+        }
+        else {
+            const div = document.createElement('div');
+            div.innerHTML = `
+            <div class="card h-100 w-50 mx-auto">
+                <img class="mx-auto" src="${details.image}" class="card-img-top w-50" alt="...">
+                <div class="card-body">
+                <h5 class="card-title text-center">${details.name}</h5>
+                <p class="card-text text-center">${details.releaseDate}</p>
+                </div>
+                <div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">Storage: ${details.mainFeatures.storage}</li>
+                <li class="list-group-item text-center">Display: ${details.mainFeatures.displaySize}</li>
+                <li class="list-group-item text-center">Chip: ${details.mainFeatures.chipSet}</li>
+                </ul>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">${details.releaseDate}</small>
+                </div>
+            </div>`
+            phoneDetails.appendChild(div);
+        }
 
     }
 }
