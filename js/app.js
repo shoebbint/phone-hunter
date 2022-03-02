@@ -1,5 +1,6 @@
 // search-button-function
 const phoneSearch = () => {
+    // validation
     document.getElementById('phone-details').innerHTML = "";
 
     let searchText = document.getElementById("search-field").value;
@@ -9,22 +10,19 @@ const phoneSearch = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => showPhones(data.status, data.data))
-    console.log(data)
-
 }
 const showPhones = (apiData, phoneResults) => {
     document.getElementById("search-field").value = "";
+    // showing search result
     const searchResult = document.getElementById('search-result');
     const noResultDiv = document.getElementById('no-result');
     const phones = phoneResults.slice(0, 20);
+    // result validation
     if (apiData == true) {
-
         noResultDiv.style.display = "none";
         searchResult.innerHTML = "";
         phones.forEach(phone => {
-
-            console.log(phone);
-
+            // dynamically creating div
             const div = document.createElement('div');
             div.classList.add('col');
             div.innerHTML = `
@@ -47,21 +45,23 @@ const showPhones = (apiData, phoneResults) => {
     }
 
 }
-
+// show details api
 const seeDetails = (id) => {
 
     const url = `https://openapi.programming-hero.com/api/phone/${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => showDetails(data.data))
+}
+// showing details function
+const showDetails = (details) => {
+    const phoneDetails = document.getElementById('phone-details');
+    // validation
+    phoneDetails.innerHTML = "";
 
-    const showDetails = (details) => {
-        const phoneDetails = document.getElementById('phone-details');
-        phoneDetails.innerHTML = "";
-        console.log(details.others);
-
-        const div = document.createElement('div');
-        div.innerHTML = `
+    // dynamically creating div
+    const div = document.createElement('div');
+    div.innerHTML = `
             <div class="card h-100 w-50 mx-auto">
                 <img class="mx-auto" src="${details.image}" class="card-img-top w-50" alt="...">
                 <div class="card-body">
@@ -86,7 +86,6 @@ const seeDetails = (id) => {
                 </ul>
                 </div>
             </div>`
-        phoneDetails.appendChild(div);
+    phoneDetails.appendChild(div);
 
-    }
 }
