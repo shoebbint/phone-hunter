@@ -12,15 +12,17 @@
 </head>
 
 <body>
-    <section class="container">
-        <div>
+    <section class=" container ">
+        <div class="mt-5 mb-5">
             <div>
                 <h1 class="text-center">Mobile Discoverer</h1>
             </div>
+            <div>
+                <img src="images/mobile-icon.png" class="img rounded mx-auto d-block" alt="...">
+            </div>
             <div class="input-group mb-3  ">
-                <input type="text" id="search-field" class="form-control rounded-pill"
-                    placeholder="Recipient's username" aria-label="Recipient's username"
-                    aria-describedby="button-addon2">
+                <input type="text" id="search-field" class="form-control rounded-pill" placeholder="Search phones"
+                    aria-label="Search phones" aria-describedby="button-addon2">
                 <button onclick="phoneSearch()" class="btn btn-outline-warning rounded-pill " type="button"
                     id="search-btn">Search</button>
             </div>
@@ -33,7 +35,11 @@
             <div class="" id="phone-details">
 
             </div>
-            <div class="row row-cols-1 row-cols-md-3 g-4 pt-5" id="search-result">
+            <div class=" row row-cols-1 row-cols-md-3 g-4 pt-5" id="search-result">
+
+            </div>
+            <div id="see-more-btn" class="see-more-button">
+                <button type="button" class="btn btn-info">See more</button>
 
             </div>
         </div>
