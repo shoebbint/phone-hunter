@@ -82,7 +82,7 @@ const showDetails = (details) => {
                 <b>USB :</b> ${details.others ? details.others.USB : "Not Found"} <br>
                 <b>WLAN :</b> ${details.others ? details.others.WLAN : "Not Found"} <br>
                    
-                    </li>
+                </li>
                 </ul>
                 </div>
             </div>`
